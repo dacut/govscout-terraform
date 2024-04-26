@@ -1,5 +1,5 @@
-resource "aws_dynamodb_table" "govscout_access_log" {
-  name         = "${local.project}${title(local.environment)}AccessLog"
+resource "aws_dynamodb_table" "govscout_crawler_log" {
+  name         = "${local.project}${title(local.environment)}CrawlerLog"
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "CrawlId"
   range_key    = "RequestId"

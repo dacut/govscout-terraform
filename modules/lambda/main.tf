@@ -7,5 +7,5 @@ terraform {
 }
 
 locals {
-  lambda_function_name = "${local.project}${title(local.environment)}Backend"
+  lambda_function_name = "${local.project}${title(local.environment)}Crawler"
 }

@@ -6,6 +6,7 @@ resource "aws_sqs_queue" "crawl_queue" {
     deadLetterTargetArn = aws_sqs_queue.crawl_dead_letter_queue.arn
     maxReceiveCount     = 5
   })
+  visibility_timeout_seconds = 610
 }
 
 resource "aws_sqs_queue" "crawl_dead_letter_queue" {
