@@ -1,5 +1,5 @@
-resource "aws_ecr_repository" "govscout_backend" {
-  name                 = "${local.project_lower}-backend-${local.environment_lower}"
+resource "aws_ecr_repository" "govscout_crawler" {
+  name                 = "${local.project_lower}-${local.environment_lower}-crawler"
   image_tag_mutability = "IMMUTABLE"
 
   encryption_configuration {
@@ -11,8 +11,8 @@ resource "aws_ecr_repository" "govscout_backend" {
   }
 }
 
-resource "aws_ecr_lifecycle_policy" "govscout_backend" {
-  repository = aws_ecr_repository.govscout_backend.name
+resource "aws_ecr_lifecycle_policy" "govscout_crawler" {
+  repository = aws_ecr_repository.govscout_crawler.name
 
   policy = jsonencode(
     {
@@ -48,8 +48,8 @@ resource "aws_ecr_lifecycle_policy" "govscout_backend" {
   )
 }
 
-resource "aws_ecr_repository_policy" "govscout_backend" {
-  repository = aws_ecr_repository.govscout_backend.name
+resource "aws_ecr_repository_policy" "govscout_crawler" {
+  repository = aws_ecr_repository.govscout_crawler.name
 
   policy = jsonencode(
     {
