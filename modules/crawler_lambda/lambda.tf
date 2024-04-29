@@ -21,6 +21,8 @@ resource "aws_lambda_function" "govscout_crawler" {
       LOG_DYNAMODB_TABLE = aws_dynamodb_table.govscout_crawler_log.name
       SQS_QUEUE_URL      = aws_sqs_queue.crawl_queue.url
       SSM_PREFIX         = "/${local.project}/${title(local.environment)}/"
+      RUST_LOG           = "debug"
+      RUST_BACKTRACE     = "1"
     }
   }
 

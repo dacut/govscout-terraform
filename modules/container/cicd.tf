@@ -60,6 +60,6 @@ resource "aws_codebuild_project" "govscout_crawler" {
 }
 
 resource "aws_cloudwatch_log_group" "govscout_codebuild_crawler" {
-  name              = "${local.environment}/${local.project}/CrawlerCodeBuild"
+  name              = "/${local.environment}/${local.project}/CrawlerCodeBuild"
   retention_in_days = 365
 }

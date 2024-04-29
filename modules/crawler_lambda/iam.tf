@@ -32,30 +32,34 @@ resource "aws_iam_policy" "govscout_lambda_crawler" {
       {
         Effect = "Allow"
         Action = [
-          "s3:GetObject",
-          "s3:PutObject",
-        ]
-        Resource = [
-          aws_s3_bucket.govscout_crawler_pages.arn,
-          "${aws_s3_bucket.govscout_crawler_pages.arn}/*",
-        ]
-      },
-      {
-        Effect = "Allow",
-        Action = [
           "dynamodb:PutItem",
-        ]
-        Resource = aws_dynamodb_table.govscout_crawler_log.arn
-      },
-      {
-        Effect = "Allow",
-        Action = [
+          "s3:GetObject",
+          "s3:GetObjectAcl",
+          "s3:GetObjectAttributes",
+          "s3:GetObjectTagging",
+          "s3:GetObjectVersion",
+          "s3:GetObjectVersionAcl",
+          "s3:GetObjectVersionAttributes",
+          "s3:GetObjectVersionTagging",
+          "s3:ListBucket",
+          "s3:ListBucketVersions",
+          "s3:PutObject",
+          "s3:PutObjectAcl",
+          "s3:PutObjectTagging",
           "sqs:ReceiveMessage",
           "sqs:DeleteMessage",
           "sqs:GetQueueAttributes",
+          "sqs:SendMessage",
+          "ssm:GetParameter",
         ]
-        Resource = aws_sqs_queue.crawl_queue.arn
-      }
+        Resource = [
+          aws_dynamodb_table.govscout_crawler_log.arn,
+          aws_s3_bucket.govscout_crawler_pages.arn,
+          "${aws_s3_bucket.govscout_crawler_pages.arn}/*",
+          aws_sqs_queue.crawl_queue.arn,
+          "arn:${local.partition}:ssm:${local.region}:${local.account_id}:parameter/${local.project}/${title(local.environment)}/*",
+        ]
+      },
     ]
   })
 }

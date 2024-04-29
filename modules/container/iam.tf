@@ -103,6 +103,7 @@ resource "aws_iam_policy" "govscout_crawler_codebuild" {
           Resource = [
             aws_ecr_repository.govscout_crawler.arn,
             aws_cloudwatch_log_group.govscout_codebuild_crawler.arn,
+            "${aws_cloudwatch_log_group.govscout_codebuild_crawler.arn}:*",
             var.crawler_lambda_function_arn,
           ]
         },
